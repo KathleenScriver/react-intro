@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import Greeting from './Greeting'
 import TextField from './TextField';
+import style from './style';
 
 export default class SimpleForm extends Component {
   constructor(props) {
