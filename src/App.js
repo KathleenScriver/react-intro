@@ -1,11 +1,11 @@
 import React, { Component } from 'react';
 import logo from './logo.svg';
 import './App.css';
-import Greeting from './Greeting'
+import SimpleForm from './SimpleForm';
 
 const App = () => (
   <div>
-    <Greeting firstName="Kat" lastName="Yruegas"/>
+    <SimpleForm />
   </div>
 );
 
