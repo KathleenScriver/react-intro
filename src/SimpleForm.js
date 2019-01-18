@@ -1,12 +1,30 @@
 import React, { Component } from 'react';
 import Greeting from './Greeting'
+import style from './style'
 
 export default class SimpleForm extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      firstName = "",
-    }
+      firstName: "",
+      firstNameError: "",
+    };
+  }
+
+  validateName = (name) => {
+    const regex = /[A-Za-z]{3,}/;
+
+    return !regex.test(name)
+     ? "The name must contain at least 3 letters. Numbers and special characters are not allowed."
+     : "";
+  };
+
+  onFirstNameBlur = () => {
+    const { firstName } = this.state;
+
+    const firstNameError = this.validateName(firstName);
+
+    return this.setState({ firstNameError });
   }
 
   onFirstNameChange = (event) =>
@@ -16,14 +34,24 @@ export default class SimpleForm extends Component {
 
 
   render() {
+    const { firstNameError, firstName } = this.state
+
     return (
-      <div>
-        <input
-          type='text'
-          name='first name'
-          onChange={this.onFirstNameChange}
-        />
-        <Greeting firstName={this.state.firstName} />
+      <div style={style.form}>
+        <div style={style.inputGroup}>
+          <label> First Name:
+            <input
+              style={style.input}
+              type='text'
+              name='firstName'
+              onChange={this.onFirstNameChange}
+              onBlur={this.onFirstNameBlur}
+            />
+            {firstNameError && <div style={style.error}>{firstNameError}</div>}
+          </label>
+        </div>
+
+        <Greeting firstName={firstName} />
       </div>
     );
   }
