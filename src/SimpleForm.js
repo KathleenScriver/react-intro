@@ -7,7 +7,9 @@ export default class SimpleForm extends Component {
     super(props);
     this.state = {
       firstName: "",
+      lastName: "",
       firstNameError: "",
+      lastNameError: "",
     };
   }
 
@@ -32,9 +34,21 @@ export default class SimpleForm extends Component {
       firstName: event.target.value
     });
 
+  onLastNameBlur = () => {
+    const { lastName } = this.state;
+
+    const lastNameError = this.validateName(lastName);
+
+    return this.setState({ lastNameError });
+  }
+
+  onLastNameChange = (event) =>
+    this.setState({
+      lastName: event.target.value
+    });
 
   render() {
-    const { firstNameError, firstName } = this.state
+    const { firstNameError, firstName, lastName, lastNameError } = this.state
 
     return (
       <div style={style.form}>
@@ -51,7 +65,20 @@ export default class SimpleForm extends Component {
           </label>
         </div>
 
-        <Greeting firstName={firstName} />
+        <div style={style.inputGroup}>
+          <label> Last Name:
+            <input
+              syle={style.input}
+              type='text'
+              name='lastName'
+              onChange={this.onLastNameChange}
+              onBlur={this.onLastNameBlur}
+            />
+            {lastNameError && <div style={style.error}>{lastNameError}</div>}
+          </label>
+        </div>
+
+        <Greeting firstName={firstName} lastName={lastName}/>
       </div>
     );
   }
