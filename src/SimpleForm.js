@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import Greeting from './Greeting'
-import style from './style'
+import TextField from './TextField';
 
 export default class SimpleForm extends Component {
   constructor(props) {
@@ -52,31 +52,18 @@ export default class SimpleForm extends Component {
 
     return (
       <div style={style.form}>
-        <div style={style.inputGroup}>
-          <label> First Name:
-            <input
-              style={style.input}
-              type='text'
-              name='firstName'
-              onChange={this.onFirstNameChange}
-              onBlur={this.onFirstNameBlur}
-            />
-            {firstNameError && <div style={style.error}>{firstNameError}</div>}
-          </label>
-        </div>
 
-        <div style={style.inputGroup}>
-          <label> Last Name:
-            <input
-              syle={style.input}
-              type='text'
-              name='lastName'
-              onChange={this.onLastNameChange}
-              onBlur={this.onLastNameBlur}
-            />
-            {lastNameError && <div style={style.error}>{lastNameError}</div>}
-          </label>
-        </div>
+        <TextField name='firstName'
+                   label='First Name'
+                   onChange={this.onFirstNameChange}
+                   onBlur={this.onFirstNameBlur}
+                   error={firstNameError} />
+
+       <TextField name='lastName'
+                  label='Last Name'
+                  onChange={this.onLastNameChange}
+                  onBlur={this.onLastNameBlur}
+                  error={lastNameError} />
 
         <Greeting firstName={firstName} lastName={lastName}/>
       </div>
